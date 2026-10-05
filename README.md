@@ -1,3 +1,4 @@
 # Proyecto1
-Sara Alós Plaza
+Sara Alós Plaza.
+
 Proyecto intermodular: Biblioteca
