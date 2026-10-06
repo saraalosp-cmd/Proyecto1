@@ -1,0 +1,22 @@
+# Compilados
+/target/
+/build/
+/bin/
+/out/
+*.class
+*.jar
+!lib/*.jar
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
