@@ -14,7 +14,7 @@ public class Libro {
     private EstadoLectura estado;
 
     // constructor
-    public Libro (String titulo, String autor, String isbn, String editorial, int paginas, String sinopsis, String estado) {
+    public Libro (String titulo, String autor, String isbn, String editorial, int paginas, String sinopsis, EstadoLectura estado) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
@@ -44,7 +44,7 @@ public class Libro {
     public void setPaginas(int nuevaPaginas) {this.paginas = nuevaPaginas;}
 
     public String getSinopsis() { return sinopsis;}
-    public void setSinopsis(String nuevaSinopsis) {this.isbn = nuevaSinopsis;}
+    public void setSinopsis(String nuevaSinopsis) {this.sinopsis = nuevaSinopsis;}
 
     public EstadoLectura getEstado() { return estado;}
     public void setEstado(EstadoLectura nuevoEstado) {this.estado = nuevoEstado;}
