@@ -34,25 +34,6 @@ Como usuario de la app, quiero:
 - Sección **Libro**: información ampliada (ISBN, páginas, editorial) y sinopsis editable.
 - Barra superior de navegación, con la configuración del perfil.
 
-### 🗄️ Base de datos
-
-```sql
-CREATE DATABASE IF NOT EXISTS biblioteca;
-USE biblioteca;
-
-CREATE TABLE IF NOT EXISTS Libros (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR (200) NOT NULL,
-    autor VARCHAR(150) NOT NULL,
-    ISBN VARCHAR(50) UNIQUE,
-    editorial VARCHAR(50),
-    paginas INT,
-    sinopsis TEXT,
-    inicio_lectura DATE,
-    fin_lectura DATE,
-    estado ENUM ("lo tengo", "leyendo", "leído", "deseado") NOT NULL DEAFULT "lo tengo"
-);
-```
 
 ### 🔌 Conexión DB
 
