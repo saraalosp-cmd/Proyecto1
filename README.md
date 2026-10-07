@@ -76,9 +76,8 @@ public class ConexionDB {
 Decido descargar el [driver para la conexión](https://dev.mysql.com/downloads/connector/j/) desde la página oficial de MySQL,
 y crear la siguiente estructura en mi proyecto:
 
-- src: código fuente
+- src: código fuente + base de datos
 - lib: conector MySQL (.jar)
-- biblioteca.sql
 
 Añado también un archivo settings.json para indicar a VSC que los .jar de lib son librerías del proyecto
 
