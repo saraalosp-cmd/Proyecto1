@@ -40,17 +40,17 @@ public class LibroDAO {
     public void imprimirBiblioteca(Connection conexion) {
         try {
             Statement stmt = conexion.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT id, titulo, autor, editorial, estado FROM Libro");
+            ResultSet rs = stmt.executeQuery("SELECT id, titulo, autor, ISBN, editorial, estado FROM Libro");
 
-            System.out.printf("%-5s%-30s%-30s%-10s%-20s%-10%n", "id", "titulo", "autor", "isbn", "editorial", "estado");
-            System.out.println("-".repeat(95));
+            System.out.printf("%-5s%-30s%-30s%-20s%-20s%-20s%n", "id", "titulo", "autor", "ISBN", "editorial", "estado");
+            System.out.println("-".repeat(125));
 
             while (rs.next()) {
-                System.out.printf("%-5s%-30s%-30s%-10s%-20s%-10%n",
+                System.out.printf("%-5s%-30s%-30s%-20s%-20s%-20s%n",
                 rs.getInt("id"),
                 rs.getString("titulo"),
                 rs.getString("autor"),
-                rs.getString("isbn"),
+                rs.getString("ISBN"),
                 rs.getString("editorial"),
                 rs.getString("estado"));
                 }
@@ -87,7 +87,7 @@ public class LibroDAO {
 
     public Libro buscarLibro (Connection conexion, int id) {
         try {
-            PreparedStatement ps = conexion.prepareStatement("SELECT titulo, autor, isbn, editorial, paginas, " 
+            PreparedStatement ps = conexion.prepareStatement("SELECT titulo, autor, ISBN, editorial, paginas, " 
             + "sinopsis, inicio_lectura, fin_lectura, estado FROM Libro WHERE id = ?");
             ps.setInt(1, id);
 
@@ -96,7 +96,7 @@ public class LibroDAO {
                 Libro libro = new Libro(
                     rs.getString("titulo"),
                     rs.getString("autor"),
-                    rs.getString("isbn"),
+                    rs.getString("ISBN"),
                     rs.getString("editorial"),
                     rs.getInt("paginas"),
                     rs.getString("sinopsis"),
@@ -121,7 +121,7 @@ public class LibroDAO {
     public void añadirLibro(Connection conexion, Libro libro) {
 
         try {
-            PreparedStatement ps = conexion.prepareStatement("INSERT INTO Libro (titulo, autor, isbn, editorial, paginas, sinopsis, estado) "
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO Libro (titulo, autor, ISBN, editorial, paginas, sinopsis, estado) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)");
             
             ps.setString(1, libro.getTitulo());
@@ -176,7 +176,7 @@ public class LibroDAO {
         }
 
         try {
-            PreparedStatement ps = conexion.prepareStatement("UPDATE Libro SET titulo = ?, autor = ?, isbn = ?, editorial = ?, paginas = ?, sinopsis = ?, inicio_lectura = ?, fin_lectura = ?, estado = ?");
+            PreparedStatement ps = conexion.prepareStatement("UPDATE Libro SET titulo = ?, autor = ?, ISBN = ?, editorial = ?, paginas = ?, sinopsis = ?, inicio_lectura = ?, fin_lectura = ?, estado = ? WHERE id = ?");
             ps.setString(1, libro.getTitulo());
             ps.setString(2, libro.getAutor());
             ps.setString(3, libro.getIsbn());
@@ -186,6 +186,7 @@ public class LibroDAO {
             ps.setDate(7, inicio);
             ps.setDate(8, fin);
             ps.setString(9, libro.getEstado().getValorDB());
+            ps.setInt(10, libro.getId());
 
             ps.executeUpdate();
             System.out.println("Libro modificado correctamente.");
@@ -205,7 +206,7 @@ public class LibroDAO {
         }
 
         try {
-            PreparedStatement ps = conexion.prepareStatement("DELETE * FROM Libro WHERE id = ?");
+            PreparedStatement ps = conexion.prepareStatement("DELETE FROM Libro WHERE id = ?");
             ps.setInt(1, id);
 
             ps.executeUpdate();

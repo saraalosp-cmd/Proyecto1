@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Libro (
     sinopsis TEXT,
     inicio_lectura DATE,
     fin_lectura DATE,
-    estado ENUM ("lo tengo", "leyendo", "leído", "deseado") NOT NULL DEFAULT "lo tengo"
+    estado ENUM ("lo tengo", "leyendo", "leido", "deseado") NOT NULL DEFAULT "lo tengo"
 );
 COMMIT;
 

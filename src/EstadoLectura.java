@@ -2,7 +2,7 @@ public enum EstadoLectura {
     // valores
     LO_TENGO("lo tengo"),
     LEYENDO("leyendo"),
-    LEIDO("leído"),
+    LEIDO("leido"),
     DESEADO("deseado");
 
     // atributo

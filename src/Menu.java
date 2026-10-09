@@ -22,7 +22,7 @@ public class Menu {
             int id;
 
             do {
-                System.out.println(menu);
+                System.out.println("\n" + menu);
                 opcion = Integer.parseInt(sc.nextLine());
 
                 if (opcion >= 2 && opcion <= 6 && conexion == null) {
@@ -35,17 +35,17 @@ public class Menu {
                         conexion = libroDAO.conexion(sc);
                         break;
                     case 2: 
-                        System.out.println("IMPRIMIR BIBLIOTECA");
+                        System.out.println("\nIMPRIMIR BIBLIOTECA");
                         libroDAO.imprimirBiblioteca(conexion);
                         break;
                     case 3: 
-                        System.out.println("IMPRIMIR LIBRO");
+                        System.out.println("\nIMPRIMIR LIBRO");
                         System.out.println("Introduce el id: ");
                         id = Integer.parseInt(sc.nextLine());
                         libroDAO.imprimirLibro(conexion, id);
                         break;
                     case 4:
-                        System.out.println("AÑADIR LIBRO");
+                        System.out.println("\nAÑADIR LIBRO");
                         System.out.println("Título: ");
                         String titulo = sc.nextLine();
                         System.out.println("Autor: ");
@@ -58,24 +58,26 @@ public class Menu {
                         int paginas = Integer.parseInt(sc.nextLine());
                         System.out.println("Sinopsis: ");
                         String sinopsis = sc.nextLine();
-                        System.out.println("Estado (lo tengo, leyendo, leído, deseado): ");
+                        System.out.println("Estado (lo tengo, leyendo, leido, deseado): ");
                         EstadoLectura estado = EstadoLectura.desdeDB(sc.nextLine().toLowerCase());
 
                         Libro libro = new Libro (titulo, autor, isbn, editorial, paginas, sinopsis, estado);
                         libroDAO.añadirLibro(conexion, libro);
                         break;
                     case 5: 
-                        System.out.println("MODIFICAR LIBRO");
+                        System.out.println("\nMODIFICAR LIBRO");
                         System.out.println("Introduce el id: ");
                         id = Integer.parseInt(sc.nextLine());
                         libroDAO.modificarLibro(conexion,sc, id);
                         break;
                     case 6: 
+                        System.out.println("\nELIMINAR LIBRO");
                         System.out.println("Introduce el id: ");
                         id = Integer.parseInt(sc.nextLine());
                         libroDAO.eliminarLibro(conexion, id);
                         break;
                     case 0:
+                        System.out.println("\nSALIR");
                         System.out.println("Saliendo...");
                         libroDAO.desconexion(conexion);
                         break;
