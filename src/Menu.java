@@ -17,6 +17,11 @@ public class Menu {
             0. Salir
         """;
 
+        /** 
+        * Valida que la opción elegida esté dentro de las opciones del menú y, según la opción elegida
+        * realiza unas acciones u otras
+        * 
+        */
         public void validarOpcion() {
             int opcion;
             int id;
@@ -87,6 +92,10 @@ public class Menu {
                 }
             } while (opcion != 0);
         }
+
+    /** 
+    * Ejecuta el código
+    */
     public static void main(String[] args) {
         Menu app = new Menu();
         app.validarOpcion();
