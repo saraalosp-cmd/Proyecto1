@@ -21,7 +21,7 @@ public class Libro {
         this.editorial = editorial;
         this.paginas = paginas;
         this.sinopsis = sinopsis;
-        this.estado = EstadoLectura.LO_TENGO;
+        this.estado = estado;
     }
 
     // getters y setters
@@ -40,11 +40,17 @@ public class Libro {
     public String getEditorial() { return editorial;}
     public void setEditorial(String nuevaEditorial) {this.editorial = nuevaEditorial;}
 
-    public int getPAginas() { return paginas;}
+    public int getPaginas() { return paginas;}
     public void setPaginas(int nuevaPaginas) {this.paginas = nuevaPaginas;}
 
     public String getSinopsis() { return sinopsis;}
     public void setSinopsis(String nuevaSinopsis) {this.sinopsis = nuevaSinopsis;}
+
+    public LocalDate getInicioLectura() {return inicioLectura;}
+    public void setInicioLectura(LocalDate nuevaFecha) {this.inicioLectura = nuevaFecha;}
+
+    public LocalDate getFinLectura() {return finLectura;}
+    public void setFinLectura(LocalDate nuevaFecha) {this.finLectura = nuevaFecha;}
 
     public EstadoLectura getEstado() { return estado;}
     public void setEstado(EstadoLectura nuevoEstado) {this.estado = nuevoEstado;}

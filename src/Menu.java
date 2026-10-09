@@ -1,9 +1,11 @@
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class Menu {
     
     private Scanner sc = new Scanner(System.in);
     private LibroDAO libroDAO = new LibroDAO();
+    private Connection conexion;
 
     String menu = """
         BIBLIOTECA
@@ -22,21 +24,29 @@ public class Menu {
 
         do {
             System.out.println(menu);
-            opcion = sc.nextInt();
+            opcion = Integer.parseInt(sc.nextLine());
+
+            if (opcion >= 2 && opcion <= 6 && conexion == null) {
+                System.out.println("Primero conecta la base de datos (opción 1).");
+                continue;
+            }
 
             switch(opcion) {
                 case 1: 
-                    conexion();
+                    conexion = libroDAO.conexion(sc);
                     break;
                 case 2: 
-                    imprimirBiblioteca();
+                    System.out.println("IMPRIMIR BIBLIOTECA");
+                    libroDAO.imprimirBiblioteca(conexion);
                     break;
                 case 3: 
+                    System.out.println("IMPRIMIR LIBRO");
                     System.out.println("Introduce el id: ");
-                    id = sc.nextInt();
-                    imprimirLibro(id);
+                    id = Integer.parseInt(sc.nextLine());
+                    libroDAO.imprimirLibro(conexion, id);
                     break;
                 case 4:
+                    System.out.println("AÑADIR LIBRO");
                     System.out.println("Título: ");
                     String titulo = sc.nextLine();
                     System.out.println("Autor: ");
@@ -46,29 +56,29 @@ public class Menu {
                     System.out.println("Editorial: ");
                     String editorial = sc.nextLine();
                     System.out.println("Páginas: ");
-                    int paginas = sc.nextInt();
-                    sc.nextLine();
+                    int paginas = Integer.parseInt(sc.nextLine());
                     System.out.println("Sinopsis: ");
                     String sinopsis = sc.nextLine();
-                    System.out.println("Estado: ");
-                    EstadoLectura estado = EstadoLectura.valueOf(sc.nextLine().toUpperCase());
+                    System.out.println("Estado (lo tengo, leyendo, leído, deseado): ");
+                    EstadoLectura estado = EstadoLectura.desdeDB(sc.nextLine().toLowerCase());
 
                     Libro libro = new Libro (titulo, autor, isbn, editorial, paginas, sinopsis, estado);
-                    añadirLibro(libro);
+                    libroDAO.añadirLibro(conexion, libro);
                     break;
                 case 5: 
+                    System.out.println("MODIFICAR LIBRO");
                     System.out.println("Introduce el id: ");
-                    id = sc.nextInt();
-                    modificarLibro(id);
+                    id = Integer.parseInt(sc.nextLine());
+                    libroDAO.modificarLibro(conexion,sc, id);
                     break;
                 case 6: 
                     System.out.println("Introduce el id: ");
-                    id = sc.nextInt();
-                    eliminarLibro(id);
+                    id = Integer.parseInt(sc.nextLine());
+                    libroDAO.eliminarLibro(conexion, id);
                     break;
                 case 0:
                     System.out.println("Saliendo...");
-                    desconexion();
+                    libroDAO.desconexion(conexion);
                     break;
                 default: 
                     System.out.println("Opción no válida.");
