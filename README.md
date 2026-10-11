@@ -41,23 +41,30 @@ Primer proyecto del ciclo de DAM, trabajando por sprints.
 - MySQL Server
 - Driver MySQL Connector/J añadido al proyecto (archivo .jar)
 
-Pasos
+**Pasos**
 
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/saraalosp-cmd/bibliotecaJava.git
+   git clone https://github.com/saraalosp-cmd/bibliotecaJava.git
 ```
 
 2. Crea la base de datos ejecutando el script de SQL del repositorio (biblioteca.sql).
 
-3. Añade el .jar del driver al classpath del proyecto.
+3. Añade el .jar del driver a la carpeta `lib` del proyecto.
 
 4. Compila y ejecuta la clase Menu.
 
+   **Windows:**
 ```bash
-javac -cp ".;mysql-connector-j-[versión].jar" *.java
-java cp ".;mysql-connector-j-[versión].jar" Menu
+   javac -cp "lib/mysql-connector-j-26.7.0.jar" -d bin src/*.java
+   java -cp "bin;lib/mysql-connector-j-26.7.0.jar" Menu
+```
+
+   **Linux/macOS:**
+```bash
+   javac -cp "lib/mysql-connector-j-26.7.0.jar" -d bin src/*.java
+   java -cp "bin:lib/mysql-connector-j-26.7.0.jar" Menu
 ```
 
 5. En el menú, elige primero la opción **1. Conectar** e introduce los datos de tu servidor MySQL.
@@ -82,8 +89,8 @@ BIBLIOTECA
 | Archivo | Descripción |
 | --- | --- |
 | `Libro.java` | Modelo: representa un libro con todos sus atributos. |
-| `EstadoLectura.java` | `enum` con los estados de lectura. Cada constante guarda el texto que usa en la base de datos (`valorDB`), y el método `desdeDB()`convierte ese texto en la constante correspondiente. |
-| `LibroDAO.java` | Acceso a datos: conexión y operaciones sobre la tabla `Libro`con JDBC. |
+| `EstadoLectura.java` | `enum` con los estados de lectura. Cada constante guarda el texto que usa en la base de datos (`valorDB`), y el método `desdeDB()` convierte ese texto en la constante correspondiente. |
+| `LibroDAO.java` | Acceso a datos: conexión y operaciones sobre la tabla `Libro` con JDBC. |
 | `Menu.java` | Menú de consola y punto de entrada del programa. |
 | `biblioteca.sql` | Script para crear la base de datos y la tabla `Libro`. |
 
