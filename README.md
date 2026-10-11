@@ -56,16 +56,16 @@ Primer proyecto del ciclo de DAM, trabajando por sprints.
 4. Compila y ejecuta la clase Menu.
 
    **Windows:**
-```bash
+   ```bash
    javac -cp "lib/mysql-connector-j-26.7.0.jar" -d bin src/*.java
    java -cp "bin;lib/mysql-connector-j-26.7.0.jar" Menu
-```
+   ```
 
    **Linux/macOS:**
-```bash
+   ```bash
    javac -cp "lib/mysql-connector-j-26.7.0.jar" -d bin src/*.java
    java -cp "bin:lib/mysql-connector-j-26.7.0.jar" Menu
-```
+   ```
 
 5. En el menú, elige primero la opción **1. Conectar** e introduce los datos de tu servidor MySQL.
 
