@@ -1,9 +1,10 @@
 # 📚 Biblioteca personal
 Aplicación para gestionar la biblioteca personal. Permite almacenar libros y hacer un seguimiento de cada uno según su estado: los que quiero (*deseado*), los que tengo (*lo tengo*), los que estoy leyendo (*leyendo*), los que he leído (*leido*).
 Cada libro se guarda con: título, autor, ISBN, editorial, número de páginas, sinopsis, fechas de lectura y estado.
-
-> [!WARNING] **Proyecto en desarrollo.** 
+ 
+🚧 **Proyecto en desarrollo.** 
 Primer proyecto del ciclo de DAM, trabajando por sprints.
+
 
 ### 🛠️ Tecnologías
 
@@ -12,6 +13,7 @@ Primer proyecto del ciclo de DAM, trabajando por sprints.
 - JDBC (driver MySQL Connector/J)
 - Visual Studio Code
 - Git/GitHub
+
 
 ### ✅ Requisitos funcionales
 **Implementadas**
@@ -30,6 +32,7 @@ Primer proyecto del ciclo de DAM, trabajando por sprints.
 - Cambio automático de estado según las fechas: *leyendo* si hay fecha de inicio pero no de final, *leído* si la fecha de fin es anterior a la actual.
 - Acceso a la biblioteca por páginas.
 - Interfaz gráfica.
+
 
 ### ▶️ Cómo ejecutarlo
 **Requisitos**
@@ -59,9 +62,10 @@ java cp ".;mysql-connector-j-[versión].jar" Menu
 
 5. En el menú, elige primero la opción **1. Conectar** e introduce los datos de tu servidor MySQL.
 
-**Menú**
 
-```markdown
+### Menú
+
+```text
 BIBLIOTECA
 1. Conectar
 2. Imprimir biblioteca
@@ -71,6 +75,7 @@ BIBLIOTECA
 6. Eliminar libro
 0. Salir
 ```
+
 
 ### 🗂️ Estructura del proyecto
 
@@ -82,6 +87,7 @@ BIBLIOTECA
 | `Menu.java` | Menú de consola y punto de entrada del programa. |
 | `biblioteca.sql` | Script para crear la base de datos y la tabla `Libro`. |
 
+
 ### ⚠️ Limitaciones
 
 Puntos a resolver en el siguiente sprint:
@@ -92,6 +98,7 @@ Puntos a resolver en el siguiente sprint:
 - Dejar vacío un dato obligatorio provoca un error.
 - Al eliminar un libro no se pide confirmación.
 
+
 ### ➡️ Próximos pasos
 
 - Comprobar si el libro existe antes de pedir todos los datos.
@@ -101,6 +108,7 @@ Puntos a resolver en el siguiente sprint:
 - Filtros de búsqueda por título, autor o estado.
 - Cambio automático de estado según las fechas de lectura.
 - Pruebas y ajustes.
+
 
 ### 👩‍💻 Autora
 Sara Alós Plaza [GitHub](https://github.com/saraalosp-cmd)
