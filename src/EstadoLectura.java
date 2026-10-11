@@ -5,18 +5,21 @@ public enum EstadoLectura {
     LEIDO("leido"),
     DESEADO("deseado");
 
-    // atributo
     private final String valorDB;
 
-    // constructor
     EstadoLectura (String valorDB) {
         this.valorDB = valorDB;
     }
 
-    // getter
     public String getValorDB() { return valorDB;}
 
-    // valor leído de la DB
+    /**
+    Pasa el texto de la DB al valor del enum
+
+    @param valor estado en la DB
+    @return constante de EstadoLectura asociada al valor
+    @throws IlegallArgumentException si no se corresponde a ningún estado
+     */
     public static EstadoLectura desdeDB (String valor) {
         for (EstadoLectura estado : values()) {
             if (estado.valorDB.equals(valor)) {
