@@ -2,8 +2,8 @@
 Aplicación para gestionar la biblioteca personal. Permite almacenar libros y hacer un seguimiento de cada uno según su estado: los que quiero (*deseado*), los que tengo (*lo tengo*), los que estoy leyendo (*leyendo*), los que he leído (*leido*).
 Cada libro se guarda con: título, autor, ISBN, editorial, número de páginas, sinopsis, fechas de lectura y estado.
 
-[!WARNING]
-**Proyecto en desarrollo.** Primer proyecto del ciclo de DAM, trabajando por sprints.
+> [!WARNING] **Proyecto en desarrollo.** 
+Primer proyecto del ciclo de DAM, trabajando por sprints.
 
 ### 🛠️ Tecnologías
 
@@ -24,7 +24,7 @@ Cada libro se guarda con: título, autor, ISBN, editorial, número de páginas, 
 - Elegir el estado de cada libro entre cuatro opciones: lo tengo, leyendo, leído y deseado.
 - Registrar fecha de inicio y fecha de fin de lectura (desde modificar).
 
-** Pendientes **
+**Pendientes**
 - Validación de los datos introducidos (ISBN, páginas, fechas, estados).
 - Filtrar por título, autor o estado.
 - Cambio automático de estado según las fechas: *leyendo* si hay fecha de inicio pero no de final, *leído* si la fecha de fin es anterior a la actual.
@@ -42,9 +42,9 @@ Pasos
 
 1. Clona el repositorio:
 
-'''bash
+```bash
 git clone https://github.com/saraalosp-cmd/bibliotecaJava.git
-'''
+```
 
 2. Crea la base de datos ejecutando el script de SQL del repositorio (biblioteca.sql).
 
@@ -52,16 +52,16 @@ git clone https://github.com/saraalosp-cmd/bibliotecaJava.git
 
 4. Compila y ejecuta la clase Menu.
 
-'''bash
+```bash
 javac -cp ".;mysql-connector-j-[versión].jar" *.java
 java cp ".;mysql-connector-j-[versión].jar" Menu
-'''
+```
 
 5. En el menú, elige primero la opción **1. Conectar** e introduce los datos de tu servidor MySQL.
 
 **Menú**
 
-'''markdown
+```markdown
 BIBLIOTECA
 1. Conectar
 2. Imprimir biblioteca
@@ -70,7 +70,7 @@ BIBLIOTECA
 5. Modificar libro
 6. Eliminar libro
 0. Salir
-'''
+```
 
 ### 🗂️ Estructura del proyecto
 
