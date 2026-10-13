@@ -18,4 +18,26 @@ public class Entrada {
             System.out.println("ISBN no válido, debe tener 13 dígitos.");
         }
     }
+
+    public int validarEnteros (String numero) {
+        while(true) {
+            System.out.println(numero + ": ");
+            String valor = sc.nextLine().trim();
+            if (valor.matches("-?\\d+")) {
+                return Integer.parseInt(valor);
+            }
+            System.out.println("Introduce un número entero válido.");
+        }
+    }
+
+    public EstadoLectura validarEstado() {
+        while (true) {
+            System.out.println("Estado (lo tengo, leyendo, leido, deseado): ");
+            String valor = sc.nextLine().trim().toLowerCase().replace("í", "i");
+            if (valor.matches("lo tengo | leyendo | leido | deseado")) {
+                return EstadoLectura.desdeDB(valor);
+            }
+            System.out.println("Estado no válido.");
+        }
+    }
 }
