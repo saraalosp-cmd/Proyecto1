@@ -69,7 +69,7 @@ public class Menu {
                         System.out.println("\nMODIFICAR LIBRO");
                         System.out.println("Introduce el id: ");
                         id = Integer.parseInt(sc.nextLine());
-                        libroDAO.modificarLibro(conexion,sc, id);
+                        libroDAO.modificarLibro(conexion,sc, entrada, id);
                         break;
                     case 6: 
                         System.out.println("\nELIMINAR LIBRO");
