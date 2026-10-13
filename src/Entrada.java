@@ -31,13 +31,35 @@ public class Entrada {
     /**
      * Pide un entero y repite la pregunta hasta que sea válido.
      * 
-     * @param numero nombre del dato solicitado
+     * @param dato nombre del dato solicitado
      * @return el entero introducido cuando sea correcto.
      */
-    public int validarEnteros (String numero) {
+    public int validarEnteros (String dato) {
         while(true) {
-            System.out.println(numero + ": ");
+            System.out.println(dato + ": ");
             String valor = sc.nextLine().trim();
+            if (valor.matches("-?\\d+")) {
+                return Integer.parseInt(valor);
+            }
+            System.out.println("Introduce un número entero válido.");
+        }
+    }
+
+    /**
+     * Pide un entero mostrando el valor actual.
+     * Si se deja vacío, se mantiene el actual.
+     * 
+     * @param dato nombre del dato solicitado.
+     * @param numero valor actual.
+     * @return el entero introducido o el actual si se deja vacío.
+     */
+    public int validarEnteros (String dato, int numero) {
+        while(true) {
+            System.out.println(numero + " [" + numero + "]: ");
+            String valor = sc.nextLine().trim();
+            if (valor.isEmpty()) {
+                return numero;
+            }
             if (valor.matches("-?\\d+")) {
                 return Integer.parseInt(valor);
             }
@@ -98,7 +120,12 @@ public class Entrada {
             System.out.println(dato + ": ");
             String valor = sc.nextLine().trim();
             if (!valor.isEmpty()) {
-                return valor.substring(0,1).toUpperCase() + valor.substring(1);
+                String[] palabras = valor.split("\\s+");
+                String resultado = "";
+                for (String palabra : palabras) {
+                    resultado += palabra.substring(0,1).toUpperCase() + palabra.substring(1) + " ";
+                }
+                return resultado.trim();
             }
             System.out.println("Debes introducir un valor.");
         }
