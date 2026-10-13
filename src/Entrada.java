@@ -11,10 +11,16 @@ public class Entrada {
         this.sc = sc;
     }
     
+    /**
+     * Pide el ISBN y valida que tenga 13 dígitos.
+     * Se eliminan espacios y guiones.
+     * 
+     * @return el ISBN con 13 dígitos.
+    */
     public String validarIsbn () {
         while(true) {
             System.out.println("ISBN (13 dígitos): ");
-            String valor = sc.nextLine().replaceAll("[\\s]", "");
+            String valor = sc.nextLine().replaceAll("[-\\s]", "");
             if (valor.matches("\\d{13}")) {
                 return valor;
             }
@@ -22,6 +28,12 @@ public class Entrada {
         }
     }
 
+    /**
+     * Pide un entero y repite la pregunta hasta que sea válido.
+     * 
+     * @param numero dato que se pide
+     * @return el entero introducido cuando sea correcto.
+     */
     public int validarEnteros (String numero) {
         while(true) {
             System.out.println(numero + ": ");
@@ -33,17 +45,30 @@ public class Entrada {
         }
     }
 
+    /**
+     * Pide el estado de lectura y valida que sea uno de los cuatro permitidos.
+     * No distingue mayúsculas de minúsculas y acepta "leído".
+     * 
+     * @return el estado correspondiente.
+     */
     public EstadoLectura validarEstado() {
         while (true) {
             System.out.println("Estado (lo tengo, leyendo, leido, deseado): ");
             String valor = sc.nextLine().trim().toLowerCase().replace("í", "i");
-            if (valor.matches("lo tengo | leyendo | leido | deseado")) {
+            if (valor.matches("lo tengo|leyendo|leido|deseado")) {
                 return EstadoLectura.desdeDB(valor);
             }
             System.out.println("Estado no válido.");
         }
     }
 
+    /**
+     * Pide una fecha con formato dd-mm-aaaa y comprueba que sea correcto.
+     * Si se deja vacío no se asigna ninguna fecha.
+     * 
+     * @param dato valor que se pide.
+     * @return fecha introducida si es correcta, o null si se deja vacío.
+     */
     public LocalDate validarFecha(String dato) {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         while(true) {
