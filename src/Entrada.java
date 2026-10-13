@@ -85,4 +85,15 @@ public class Entrada {
             }
         }
     }
+
+    public String validarTexto(String dato) {
+        while(true) {
+            System.out.println(dato + ": ");
+            String valor = sc.nextLine().trim();
+            if (!valor.isEmpty()) {
+                return valor.substring(0,1).toUpperCase() + valor.substring(1);
+            }
+            System.out.println("Debes introducir un valor.");
+        }
+    }
 }
