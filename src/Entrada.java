@@ -29,6 +29,26 @@ public class Entrada {
     }
 
     /**
+     * Pide el ISBN mostrando el valor actual.
+     * 
+     * @param isbn valor actual.
+     * @return el ISBN introducido, o el actual si se deja vacío.
+    */
+    public String validarIsbn (String isbn) {
+        while(true) {
+            System.out.println("ISBN (13 dígitos) [" + isbn + "]: ");
+            String valor = sc.nextLine().replaceAll("[-\\s]", "");
+            if (valor.isEmpty()) {
+                return isbn;
+            }
+            if (valor.matches("\\d{13}")) {
+                return valor;
+            }
+            System.out.println("ISBN no válido, debe tener 13 dígitos.");
+        }
+    }
+
+    /**
      * Pide un entero y repite la pregunta hasta que sea válido.
      * 
      * @param dato nombre del dato solicitado
@@ -77,6 +97,26 @@ public class Entrada {
         while (true) {
             System.out.println("Estado (lo tengo, leyendo, leido, deseado): ");
             String valor = sc.nextLine().trim().toLowerCase().replace("í", "i");
+            if (valor.matches("lo tengo|leyendo|le.do|deseado")) {
+                return EstadoLectura.desdeDB(valor);
+            }
+            System.out.println("Estado no válido.");
+        }
+    }
+
+    /**
+     * Pide el estado de lectura mostrando el actual
+     * No distingue mayúsculas de minúsculas y acepta "leído".
+     * @param estado valor actual
+     * @return el estado correspondiente.
+     */
+    public EstadoLectura validarEstado(EstadoLectura estado) {
+        while (true) {
+            System.out.println("Estado (lo tengo, leyendo, leido, deseado): ");
+            String valor = sc.nextLine().trim().toLowerCase().replace("í", "i");
+            if (valor.isEmpty()) {
+                return estado;
+            }
             if (valor.matches("lo tengo|leyendo|leido|deseado")) {
                 return EstadoLectura.desdeDB(valor);
             }
@@ -91,12 +131,16 @@ public class Entrada {
      * @param dato nombre del dato solicitado
      * @return fecha introducida si es correcta, o null si se deja vacío.
      */
-    public LocalDate validarFecha(String dato) {
+    public LocalDate validarFecha(String dato, LocalDate fecha) {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String actual = (fecha == null) ? "" : fecha.format(formato);
         while(true) {
-            System.out.println(dato + "(dd-mm-aaaa): ");
+            System.out.println(dato + "(dd-mm-aaaa) [" + fecha + "]: ");
             String valor = sc.nextLine().trim();
             if (valor.isEmpty()) {
+                return fecha;
+            }
+            if (valor.equals("-")) {
                 return null;
             }
 
@@ -128,6 +172,24 @@ public class Entrada {
                 return resultado.trim();
             }
             System.out.println("Debes introducir un valor.");
+        }
+    }
+
+    /**
+     * Pide un texto, mostrando el actual. 
+     * 
+     * @param dato nombre del dato solicitado.
+     * @param acutal valor actual
+     * @return texto formateado.
+     */
+    public String validarTexto(String dato, String actual) {
+        while(true) {
+            System.out.println(dato + " [" + actual + "]: ");
+            String valor = sc.nextLine().trim();
+            if (valor.isEmpty()){
+                return actual;
+            }
+            return valor.substring(0,1).toUpperCase() + valor.substring(1);
         }
     }
 }

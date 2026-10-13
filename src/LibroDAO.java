@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class LibroDAO {
-    
+
     /** 
     * Conecta con la DB pidiendo datos por consola.
     * Si no se introduce ningún valor, se usa el valor por defecto, excepto la contraseña.
@@ -103,8 +104,11 @@ public class LibroDAO {
         System.out.println("Editorial: "+ libro.getEditorial());
         System.out.println("Páginas: "+ libro.getPaginas());
         System.out.println("Sinopsis: "+ libro.getSinopsis());
-        System.out.println("Inicio Lectura: "+ libro.getInicioLectura());
-        System.out.println("Fin Lectura: "+ libro.getFinLectura());
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String inicio = (libro.getInicioLectura() != null) ? libro.getInicioLectura().format(formato) : "-";
+        String fin = (libro.getFinLectura() != null) ? libro.getFinLectura().format(formato) : "-";
+        System.out.println("Inicio de lectura: " + inicio);
+        System.out.println("Fin de lectura: " + fin);
         System.out.println("Estado: "+ libro.getEstado().getValorDB());  
     }
 
@@ -191,21 +195,15 @@ public class LibroDAO {
             return;
         }
         
-        libro.setTitulo(pedir(sc, "Título", libro.getTitulo()));
-        libro.setAutor(pedir(sc, "Autor", libro.getAutor()));
-        libro.setIsbn(pedir(sc, "ISBN", libro.getIsbn()));
-        libro.setEditorial(pedir(sc, "Editorial", libro.getEditorial()));
+        libro.setTitulo(entrada.validarTexto("Título", libro.getTitulo()));
+        libro.setAutor(entrada.validarTexto("Autor", libro.getAutor()));
+        libro.setIsbn(entrada.validarIsbn(libro.getIsbn()));
+        libro.setEditorial(entrada.validarTexto("Editorial", libro.getEditorial()));
         libro.setPaginas(entrada.validarEnteros("Páginas", libro.getPaginas()));
         libro.setSinopsis(pedir(sc, "Sinopsis", libro.getSinopsis()));
-        libro.setEstado(EstadoLectura.desdeDB(pedir(sc, "Estado", libro.getEstado().getValorDB())));
-
-        String inicioActual = (libro.getInicioLectura() != null) ? libro.getInicioLectura().toString() : "";
-        String inicioL = pedir (sc, "Inicio Lectura (dd-mm-aaaa)", inicioActual);
-        libro.setInicioLectura(inicioL.isEmpty() ? null : LocalDate.parse(inicioL));
-
-        String finActual = (libro.getFinLectura() != null) ? libro.getFinLectura().toString() : "";
-        String finL = pedir (sc, "Fin Lectura (dd-mm-aaaa)", finActual);
-        libro.setFinLectura(finL.isEmpty() ? null : LocalDate.parse(finL));
+        libro.setEstado(entrada.validarEstado(libro.getEstado()));
+        libro.setInicioLectura(entrada.validarFecha("Fecha de inicio", libro.getInicioLectura()));
+        libro.setFinLectura(entrada.validarFecha("Fecha fin", libro.getFinLectura()));
 
         Date inicio = null;
         if (libro.getInicioLectura() != null) {

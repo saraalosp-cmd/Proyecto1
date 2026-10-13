@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class Menu {
-        private Scanner sc = new Scanner(System.in);
+        private Scanner sc = new Scanner(System.in, "UTF-8");
         private LibroDAO libroDAO = new LibroDAO();
         private Connection conexion;
 
@@ -30,7 +30,7 @@ public class Menu {
 
             do {
                 System.out.println("\n" + menu);
-                opcion = Integer.parseInt(sc.nextLine());
+                opcion = entrada.validarEnteros("Opción");
 
                 if (opcion >= 2 && opcion <= 6 && conexion == null) {
                     System.out.println("Primero conecta la base de datos (opción 1).");
@@ -47,8 +47,7 @@ public class Menu {
                         break;
                     case 3: 
                         System.out.println("\nIMPRIMIR LIBRO");
-                        System.out.println("Introduce el id: ");
-                        id = Integer.parseInt(sc.nextLine());
+                        id = entrada.validarEnteros("Introduce el ID");
                         libroDAO.imprimirLibro(conexion, id);
                         break;
                     case 4:
@@ -58,7 +57,7 @@ public class Menu {
                         String isbn = entrada.validarIsbn();
                         String editorial = entrada.validarTexto("Editorial");
                         int paginas = entrada.validarEnteros("Páginas");
-                        System.out.println("Sinopsis: ");
+                        System.out.println("Sinopsis");
                         String sinopsis = sc.nextLine();
                         EstadoLectura estado = entrada.validarEstado();
 
@@ -67,14 +66,12 @@ public class Menu {
                         break;
                     case 5: 
                         System.out.println("\nMODIFICAR LIBRO");
-                        System.out.println("Introduce el id: ");
-                        id = Integer.parseInt(sc.nextLine());
+                        id = entrada.validarEnteros("Introduce el ID");
                         libroDAO.modificarLibro(conexion,sc, entrada, id);
                         break;
                     case 6: 
                         System.out.println("\nELIMINAR LIBRO");
-                        System.out.println("Introduce el id: ");
-                        id = Integer.parseInt(sc.nextLine());
+                        id = entrada.validarEnteros("Introduce el ID");
                         libroDAO.eliminarLibro(conexion, id);
                         break;
                     case 0:
