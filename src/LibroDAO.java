@@ -200,11 +200,11 @@ public class LibroDAO {
         libro.setEstado(EstadoLectura.desdeDB(pedir(sc, "Estado", libro.getEstado().getValorDB())));
 
         String inicioActual = (libro.getInicioLectura() != null) ? libro.getInicioLectura().toString() : "";
-        String inicioL = pedir (sc, "Inicio Lectura (aaaa-mm-dd)", inicioActual);
+        String inicioL = pedir (sc, "Inicio Lectura (dd-mm-aaaa)", inicioActual);
         libro.setInicioLectura(inicioL.isEmpty() ? null : LocalDate.parse(inicioL));
 
         String finActual = (libro.getFinLectura() != null) ? libro.getFinLectura().toString() : "";
-        String finL = pedir (sc, "Fin Lectura (aaaa-mm-dd)", finActual);
+        String finL = pedir (sc, "Fin Lectura (dd-mm-aaaa)", finActual);
         libro.setFinLectura(finL.isEmpty() ? null : LocalDate.parse(finL));
 
         Date inicio = null;
