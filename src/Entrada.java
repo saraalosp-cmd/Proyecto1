@@ -31,7 +31,7 @@ public class Entrada {
     /**
      * Pide un entero y repite la pregunta hasta que sea válido.
      * 
-     * @param numero dato que se pide
+     * @param numero nombre del dato solicitado
      * @return el entero introducido cuando sea correcto.
      */
     public int validarEnteros (String numero) {
@@ -66,7 +66,7 @@ public class Entrada {
      * Pide una fecha con formato dd-mm-aaaa y comprueba que sea correcto.
      * Si se deja vacío no se asigna ninguna fecha.
      * 
-     * @param dato valor que se pide.
+     * @param dato nombre del dato solicitado
      * @return fecha introducida si es correcta, o null si se deja vacío.
      */
     public LocalDate validarFecha(String dato) {
@@ -86,6 +86,13 @@ public class Entrada {
         }
     }
 
+    /**
+     * Pide un texto, eliminando los espacios al principio y al final y dejando
+     * la primera letra en mayúscula. 
+     * 
+     * @param dato nombre del dato solicitado.
+     * @return texto formateado.
+     */
     public String validarTexto(String dato) {
         while(true) {
             System.out.println(dato + ": ");
