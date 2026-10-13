@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Entrada {
@@ -38,6 +41,23 @@ public class Entrada {
                 return EstadoLectura.desdeDB(valor);
             }
             System.out.println("Estado no válido.");
+        }
+    }
+
+    public LocalDate validarFecha(String dato) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        while(true) {
+            System.out.println(dato + "(dd-mm-aaaa): ");
+            String valor = sc.nextLine().trim();
+            if (valor.isEmpty()) {
+                return null;
+            }
+
+            try {
+                return LocalDate.parse(valor, formato);
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha no válida.");
+            }
         }
     }
 }
