@@ -6,6 +6,8 @@ public class Menu {
         private LibroDAO libroDAO = new LibroDAO();
         private Connection conexion;
 
+        private Entrada entrada = new Entrada(sc);
+
         String menu = """
             BIBLIOTECA
             1. Conectar
@@ -51,20 +53,14 @@ public class Menu {
                         break;
                     case 4:
                         System.out.println("\nAÑADIR LIBRO");
-                        System.out.println("Título: ");
-                        String titulo = sc.nextLine();
-                        System.out.println("Autor: ");
-                        String autor = sc.nextLine();
-                        System.out.println("ISBN: ");
-                        String isbn = sc.nextLine();
-                        System.out.println("Editorial: ");
-                        String editorial = sc.nextLine();
-                        System.out.println("Páginas: ");
-                        int paginas = Integer.parseInt(sc.nextLine());
+                        String titulo = entrada.validarTexto("Título");
+                        String autor = entrada.validarTexto("Autor");
+                        String isbn = entrada.validarIsbn();
+                        String editorial = entrada.validarTexto("Editorial");
+                        int paginas = entrada.validarEnteros("Páginas");
                         System.out.println("Sinopsis: ");
                         String sinopsis = sc.nextLine();
-                        System.out.println("Estado (lo tengo, leyendo, leido, deseado): ");
-                        EstadoLectura estado = EstadoLectura.desdeDB(sc.nextLine().toLowerCase());
+                        EstadoLectura estado = entrada.validarEstado();
 
                         Libro libro = new Libro (titulo, autor, isbn, editorial, paginas, sinopsis, estado);
                         libroDAO.añadirLibro(conexion, libro);
