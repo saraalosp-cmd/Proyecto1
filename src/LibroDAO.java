@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class LibroDAO {
-
+    
     /** 
     * Conecta con la DB pidiendo datos por consola.
     * Si no se introduce ningún valor, se usa el valor por defecto, excepto la contraseña.
@@ -184,7 +184,7 @@ public class LibroDAO {
     * @param sc (Scanner)
     * @param id identificador
     */
-    public void modificarLibro(Connection conexion, Scanner sc, int id) {
+    public void modificarLibro(Connection conexion, Scanner sc, Entrada entrada, int id) {
         Libro libro = buscarLibro(conexion, id);
         if (libro == null) {
             System.out.println("No existe ningún libro con id: " + id);
@@ -195,7 +195,7 @@ public class LibroDAO {
         libro.setAutor(pedir(sc, "Autor", libro.getAutor()));
         libro.setIsbn(pedir(sc, "ISBN", libro.getIsbn()));
         libro.setEditorial(pedir(sc, "Editorial", libro.getEditorial()));
-        libro.setPaginas(Integer.parseInt(pedir(sc, "Páginas", String.valueOf(libro.getPaginas()))));
+        libro.setPaginas(entrada.validarEnteros("Páginas", libro.getPaginas()));
         libro.setSinopsis(pedir(sc, "Sinopsis", libro.getSinopsis()));
         libro.setEstado(EstadoLectura.desdeDB(pedir(sc, "Estado", libro.getEstado().getValorDB())));
 
